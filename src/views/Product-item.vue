@@ -1,36 +1,49 @@
-<script setup name=src/components/productsList.vue>
-import navbar from '@/components/Navbar-item.vue'
-import Footer from '@/components/Footer-item.vue'
+<script setup>
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { computed } from 'vue';
-import { getCompanyproducts } from '@/auth/companyproductsRepo';
+import Footer from '@/components/Footer-item.vue'
+import Navbar from '@/components/Navbar-item.vue'
+import { getCompanyproducts } from '@/auth/companyproductsRepo'
 
 const router = useRouter()
 const products = computed(() => getCompanyproducts())
+
+const getProductName = (product) => product.name || 'Producto sin nombre'
+const getButtonText = (product) => product.details_button || 'Ver detalles'
+const formatPrice = (price) => (Number.isFinite(Number(price)) ? Number(price).toFixed(2) : price)
 </script>
 
 <template>
   <header>
-    <navbar />
+    <Navbar />
   </header>
+
   <div class="products-area">
     <h1 class="title-products">Nuestros Productos</h1>
+
     <div class="products-container">
       <div v-for="product in products" :key="product.id" class="product-card">
         <div class="product-content">
-        <h2 class="product-title">{{ product.name }}</h2>
-          <img v-if="product.image" :src="product.image" :alt="product.name" class="product-image" />
-          <p class="product-description">S/ {{ product.price }}</p>
+          <h2 class="product-title">{{ getProductName(product) }}</h2>
+          <img
+            v-if="product.image"
+            :src="product.image"
+            :alt="getProductName(product)"
+            class="product-image"
+          />
+          <p class="product-description">S/ {{ formatPrice(product.price) }}</p>
         </div>
+
         <button
-  class="details-button"
-  @click="router.push({ name: 'productsDetails', params: { id: product.id } })"
->
-  {{ product.details_button }}
-</button>
+          class="details-button"
+          @click="router.push({ name: 'productsDetails', params: { id: product.id } })"
+        >
+          {{ getButtonText(product) }}
+        </button>
       </div>
     </div>
   </div>
+
   <footer>
     <Footer />
   </footer>
@@ -52,10 +65,10 @@ const products = computed(() => getCompanyproducts())
 }
 
 .title-products::after {
-  content: "";
+  content: '';
   width: 60px;
   height: 4px;
-  background-color: #325BCD;
+  background-color: #325bcd;
   position: absolute;
   bottom: -10px;
   left: 0;
@@ -73,7 +86,7 @@ const products = computed(() => getCompanyproducts())
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #325BCD, #2549ad);
+  background: linear-gradient(135deg, #325bcd, #2549ad);
   color: white;
   border-radius: 14px;
   padding: 24px;
@@ -86,7 +99,6 @@ const products = computed(() => getCompanyproducts())
   transform: translateY(-6px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
 }
-
 
 .product-content {
   display: flex;
@@ -116,7 +128,7 @@ const products = computed(() => getCompanyproducts())
 
 .details-button {
   margin-top: 20px;
-  background-color: #1F1F1F;
+  background-color: #1f1f1f;
   color: white;
   border: none;
   padding: 10px 20px;
