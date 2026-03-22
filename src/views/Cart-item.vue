@@ -54,9 +54,6 @@ function goToCheckout() {
                   +
                 </button>
               </div>
-              <p class="item-subtotal">
-                S/ {{ (item.discount_price * item.quantity).toFixed(2) }}
-              </p>
               <button
                 class="remove-btn"
                 @click="removeFromCart(item.id)"
@@ -91,7 +88,7 @@ function goToCheckout() {
           <p class="empty-icon">🛒</p>
           <p class="empty-msg">Tu carrito está vacío</p>
           <router-link to="/product-item">
-            <button class="browse-btn">Ver cupones</button>
+            <button class="browse-btn">Ver productos</button>
           </router-link>
         </div>
       </div>

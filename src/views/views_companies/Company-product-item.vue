@@ -28,12 +28,12 @@ const formatDate = (isoOrDate) => {
 
     <main class="dashboard-section">
       <div class="dashboard-container">
-        <h1 class="page-title">Cupones creados por empresa</h1>
+        <h1 class="page-title">Productos subidos</h1>
 
         <div v-if="products.length === 0" class="empty-state">
-          <p>Aún no has creado cupones.</p>
+          <p>Aún no has creado productos.</p>
           <router-link to="/Create-products" class="create-link">
-            Crear mi primer cupón
+            Crear mi primer producto
           </router-link>
         </div>
 
@@ -46,11 +46,6 @@ const formatDate = (isoOrDate) => {
             <div class="badge">{{ product.percentage || 'Oferta' }}</div>
             <h3>{{ product.name }}</h3>
             <p class="short">{{ product.shortDescription }}</p>
-
-            <div class="meta-row">
-              <strong>Código:</strong>
-              <span>{{ product.product_code }}</span>
-            </div>
             <div class="meta-row">
               <strong>Categoría:</strong>
               <span>{{ product.category }}</span>
@@ -58,10 +53,6 @@ const formatDate = (isoOrDate) => {
             <div class="meta-row">
               <strong>Precio:</strong>
               <span>S/ {{ product.price }}</span>
-            </div>
-            <div class="meta-row">
-              <strong>Vence:</strong>
-              <span>{{ formatDate(product.expiration_date) }}</span>
             </div>
             <div class="meta-row">
               <strong>Creado:</strong>

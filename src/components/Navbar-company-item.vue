@@ -19,14 +19,14 @@
         to="/Company-products"
         class="text-navbar-company"
       >
-        Mis Cupones
+        Mis Productos
       </router-link>
       <router-link
         @click="closeMenu"
         to="/Create-products"
         class="text-navbar-company"
       >
-        Crear Cupón
+        Crear Producto
       </router-link>
       <router-link
         @click="closeMenu"

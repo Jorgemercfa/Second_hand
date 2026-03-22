@@ -114,7 +114,7 @@ const onCreateproduct = () => {
 
     <section class="contact-section">
       <div class="contact-container">
-        <h1 class="main-title">Crear Cupones</h1>
+        <h1 class="main-title">Crear Productos</h1>
 
         <div class="contact-card">
           <form
@@ -126,7 +126,7 @@ const onCreateproduct = () => {
             <div v-if="success" class="message success">{{ success }}</div>
 
             <div class="form-group">
-              <label>Nombre del cupón</label>
+              <label>Nombre del producto</label>
               <input
                 v-model="name"
                 type="text"
@@ -158,7 +158,7 @@ const onCreateproduct = () => {
               </select>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label>Porcentaje / Beneficio</label>
               <input
                 v-model="percentage"
@@ -166,31 +166,31 @@ const onCreateproduct = () => {
                 placeholder="Ej: 20% o 2x1"
                 required
               />
-            </div>
+            </div> -->
 
             <div class="form-group">
               <label>Precio Original</label>
               <input v-model="originalPrice" type="number" min="1" required />
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label>Fecha de vencimiento</label>
               <input v-model="expirationDate" type="date" required />
-            </div>
+            </div> -->
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label>Términos de uso</label>
               <textarea v-model="termsOfUse" rows="2" />
-            </div>
+            </div> -->
 
             <div class="code-row">
               <div class="form-group code-input">
-                <label>Código del cupón</label>
+                <!-- <label>Código del cupón</label>
                 <input
                   v-model="productCode"
                   type="text"
                   placeholder="Se puede autogenerar"
-                />
+                /> -->
               </div>
               <button
                 type="button"

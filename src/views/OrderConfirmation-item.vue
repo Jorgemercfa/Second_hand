@@ -15,13 +15,13 @@ import Footer from '@/components/Footer-item.vue';
           <div class="success-icon">✓</div>
           <h1 class="success-title">¡Compra exitosa!</h1>
           <p class="success-msg">
-            Tu pedido fue procesado correctamente. Puedes ver tus cupones
+            Tu pedido fue procesado correctamente. Puedes ver tus productos
             adquiridos en tu perfil.
           </p>
 
           <div class="action-buttons">
             <router-link to="/Profile">
-              <button class="primary-btn">Ver mis cupones</button>
+              <button class="primary-btn">Ver mis productos</button>
             </router-link>
             <router-link to="/product-item">
               <button class="secondary-btn">Seguir comprando</button>

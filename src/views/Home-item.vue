@@ -153,10 +153,6 @@ const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
             <div class="product-mini-price">
               S/ {{ product.discount_price }}
             </div>
-
-            <div class="product-mini-date">
-              Hasta {{ product.expiration_date }}
-            </div>
           </div>
         </router-link>
       </div>
@@ -171,7 +167,7 @@ const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
       </button>
     </div>
 
-    <h1 class="title-home">Productos Restaurantes</h1>
+    <h1 class="title-home">Electrodomesticos</h1>
     <div class="our-products-wrapper">
       <button
         class="products-nav products-nav-left"

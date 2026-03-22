@@ -35,28 +35,6 @@ import Footer from '@/components/Footer-item.vue';
               <input type="tel" name="Celular" />
             </div>
 
-            <!-- <div class="form-group">
-              <label>Servicio</label>
-              <select name="Servicio">
-                <option value="">Seleccionar servicio</option>
-                <option>Desinsectación</option>
-                <option>Desinfección</option>
-                <option>Desratización</option>
-                <option>Limpieza de cisternas</option>
-                <option>Diagnóstico y monitoreo</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Dirección</label>
-              <input type="text" name="Dirección" />
-            </div>
-
-            <div class="form-group">
-              <label>Metros cuadrados</label>
-              <input type="text" name="Metros" />
-            </div> -->
-
             <div class="form-group">
               <label>Mensaje</label>
               <textarea name="Mensaje" rows="4"></textarea>
