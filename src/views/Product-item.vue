@@ -14,7 +14,7 @@ const products = computed(() => getCompanyproducts())
     <navbar />
   </header>
   <div class="products-area">
-    <h1 class="title-products">Nuestros Cupones</h1>
+    <h1 class="title-products">Nuestros Productos</h1>
     <div class="products-container">
       <div v-for="product in products" :key="product.id" class="product-card">
         <div class="product-content">

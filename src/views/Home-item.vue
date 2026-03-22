@@ -116,12 +116,10 @@ const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
     </div>
 
     <div class="text-home">
-      Al Toque simplifica la forma de comprar en línea, conectando empresas y
-      usuarios mediante ofertas reales en tiempo real y compras directas desde
-      las páginas oficiales.
+      Second Hand donde le damos una segunda oportunidad a los productos.
     </div>
 
-    <h1 class="title-home">Ofertas destacadas</h1>
+    <h1 class="title-home">Productos destacadas</h1>
 
     <!-- Carrusel de cupones -->
     <div class="our-products-wrapper">
@@ -173,7 +171,7 @@ const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
       </button>
     </div>
 
-    <h1 class="title-home">Ofertas Restaurantes</h1>
+    <h1 class="title-home">Productos Restaurantes</h1>
     <div class="our-products-wrapper">
       <button
         class="products-nav products-nav-left"

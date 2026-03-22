@@ -11,7 +11,7 @@
         >Inicio</router-link
       >
       <router-link @click="closeMenu" to="/product-item" class="text-navbar"
-        >Cupones</router-link
+        >Productos</router-link
       >
       <router-link @click="closeMenu" to="/About-item" class="text-navbar"
         >Nosotros</router-link
