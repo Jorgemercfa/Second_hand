@@ -45,21 +45,6 @@ onBeforeUnmount(() => {
 /* =============================
    CLIENTES
 ============================= */
-import c1 from '@/assets/customer-1.jpg';
-import c2 from '@/assets/customer-2.png';
-import c3 from '@/assets/customer-3.png';
-import c4 from '@/assets/customer-4.png';
-import c5 from '@/assets/customer-5.png';
-import c6 from '@/assets/customer-6.png';
-import c7 from '@/assets/customer-7.png';
-import c8 from '@/assets/customer-8.png';
-import c9 from '@/assets/customer-9.png';
-import c10 from '@/assets/customer-10.png';
-import c11 from '@/assets/customer-11.png';
-import c12 from '@/assets/customer-12.png';
-
-const customers = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12];
-const duplicatedCustomers = [...customers, ...customers];
 
 /* =============================
    CARRUSEL CUPONES (HORIZONTAL)
@@ -241,19 +226,6 @@ const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
       >
         ›
       </button>
-    </div>
-
-    <h1 class="title-home">Empresas con las que trabajamos</h1>
-    <div class="our-customers">
-      <div class="customers-track">
-        <div
-          class="customer-slide"
-          v-for="customer in duplicatedCustomers"
-          :key="customer"
-        >
-          <img :src="customer" class="customer-icons" />
-        </div>
-      </div>
     </div>
   </div>
 
