@@ -20,7 +20,7 @@ const products = computed(() => getCompanyproducts())
         <div class="product-content">
         <h2 class="product-title">{{ product.name }}</h2>
           <img v-if="product.image" :src="product.image" :alt="product.name" class="product-image" />
-          <p class="product-description">{{ product.shortDescription }}</p>
+          <p class="product-description">S/ {{ product.price }}</p>
         </div>
         <button
   class="details-button"

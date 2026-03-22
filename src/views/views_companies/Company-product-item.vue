@@ -57,7 +57,7 @@ const formatDate = (isoOrDate) => {
             </div>
             <div class="meta-row">
               <strong>Precio:</strong>
-              <span>S/ {{ product.original_price }}</span>
+              <span>S/ {{ product.price }}</span>
             </div>
             <div class="meta-row">
               <strong>Vence:</strong>

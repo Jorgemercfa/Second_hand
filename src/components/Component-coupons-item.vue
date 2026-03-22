@@ -108,14 +108,14 @@ watch(
       />
 
       <!-- badge -->
-      <div class="product-badge">
+      <!-- <div class="product-badge">
         {{ product.percentage }}
-      </div>
+      </div> -->
 
       <!-- precios -->
       <div class="product-prices">
-        <span class="original-price">S/ {{ product.original_price }}</span>
-        <span class="discount-price">S/ {{ product.discount_price }}</span>
+        <span class="discount-price">S/ {{ product.price }}</span>
+        <!-- <span class="discount-price">S/ {{ product.discount_price }}</span> -->
       </div>
 
       <!-- descripción -->
@@ -130,21 +130,6 @@ watch(
             <span class="label">Categoría</span>
             <span class="value">{{ product.category }}</span>
           </div>
-
-          <div class="info-item">
-            <span class="label">Válido hasta</span>
-            <span class="value">{{ product.expiration_date }}</span>
-          </div>
-
-          <div class="info-item">
-            <span class="label">Términos</span>
-            <span class="value">{{ product.Terms_of_use }}</span>
-          </div>
-        </div>
-
-        <div class="product-code">
-          <span>Código:</span>
-          <strong>{{ product.product_code }}</strong>
         </div>
 
         <button class="buy-button" @click="handleAddToCart">

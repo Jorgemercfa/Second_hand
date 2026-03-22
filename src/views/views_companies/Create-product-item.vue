@@ -79,7 +79,7 @@ const onCreateproduct = () => {
     longDescription: longDescription.value.trim(),
     category: category.value,
     percentage: percentage.value.trim(),
-    original_price: originalPriceNumber,
+    price: originalPriceNumber,
     expiration_date: expirationDate.value,
     Terms_of_use: termsOfUse.value.trim(),
     product_code: productCode.value.trim().toUpperCase(),
