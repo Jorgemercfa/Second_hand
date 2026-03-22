@@ -19,6 +19,22 @@ const product = computed(() =>
   products.value.find((s) => s.id === Number(route.params.id)),
 );
 
+const displayPrice = computed(() => {
+  const currentProduct = product.value;
+  if (!currentProduct) return null;
+
+  const rawPrice =
+    currentProduct.price ??
+    currentProduct.discount_price ??
+    currentProduct.originalPrice ??
+    currentProduct.tributo;
+
+  const normalizedPrice =
+    typeof rawPrice === 'string' ? Number(rawPrice) : rawPrice;
+
+  return Number.isFinite(normalizedPrice) ? normalizedPrice : null;
+});
+
 const addedFeedback = ref(false);
 
 function handleAddToCart() {
@@ -114,7 +130,9 @@ watch(
 
       <!-- precios -->
       <div class="product-prices">
-        <span class="discount-price">S/ {{ product.price }}</span>
+        <span class="discount-price">
+          S/ {{ displayPrice !== null ? displayPrice.toFixed(2) : '-' }}
+        </span>
         <!-- <span class="discount-price">S/ {{ product.discount_price }}</span> -->
       </div>
 
