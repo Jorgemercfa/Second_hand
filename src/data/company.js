@@ -2,14 +2,14 @@ export default [
   {
     id: 1,
     name: 'Pizza Express',
-    ruc: '20512345678',
+    email: '20512345678',
     password: '123456789',
     products: [],
   },
   {
     id: 2,
     name: 'Cine Juan',
-    ruc: '20598765432',
+    email: '20598765432',
     password: '123456789',
     products: [],
   },

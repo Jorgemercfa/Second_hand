@@ -25,7 +25,7 @@ export function getCompanyproducts() {
     ...product,
     companyId: null,
     companyName: product.name || '',
-    companyRuc: null,
+    companyemail: null,
     createdAt: null,
   }));
 
@@ -72,6 +72,6 @@ export function getproductsByCompany(company) {
   return products.filter(
     (product) =>
       product.companyId === company.id ||
-      (product.companyRuc && product.companyRuc === company.ruc),
+      (product.companyemail && product.companyemail === company.email),
   );
 }

@@ -39,24 +39,24 @@ const today = new Date().toLocaleDateString('es-PE', {
             <div class="action-icon">
               <i class="pi pi-plus-circle"></i>
             </div>
-            <h3>Crear Cupón</h3>
-            <p>Publica una nueva oferta para tus clientes</p>
+            <h3>Crear Producto</h3>
+            <p>Vende un producto que ya no uses</p>
           </router-link>
 
           <router-link to="/Company-products" class="action-card products-card">
             <div class="action-icon">
               <i class="pi pi-tags"></i>
             </div>
-            <h3>Mis Cupones</h3>
-            <p>Administra y revisa tus cupones activos</p>
+            <h3>Mis Productos</h3>
+            <p>Administra y revisa tus productos activos</p>
           </router-link>
 
           <router-link to="/Company-profile" class="action-card profile-card">
             <div class="action-icon">
               <i class="pi pi-building"></i>
             </div>
-            <h3>Mi Empresa</h3>
-            <p>Visualiza y edita el perfil de tu empresa</p>
+            <h3>Mi usuario vendedor</h3>
+            <p>Visualiza y edita el perfil de tu vendedor</p>
           </router-link>
         </div>
 
@@ -64,12 +64,12 @@ const today = new Date().toLocaleDateString('es-PE', {
         <div class="info-section">
           <div class="info-card">
             <h2 class="info-title">
-              <i class="pi pi-chart-line"></i> Panel de Empresa
+              <i class="pi pi-chart-line"></i> Panel de vendedor
             </h2>
             <p class="info-text">
               Desde aquí puedes gestionar todos los aspectos de tu presencia en
               Al Toque. Crea cupones atractivos, revisa el rendimiento de tus
-              ofertas y mantén actualizada la información de tu empresa.
+              ofertas y mantén actualizada la información de tu vendedor.
             </p>
           </div>
 

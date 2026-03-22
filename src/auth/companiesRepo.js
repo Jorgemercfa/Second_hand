@@ -50,24 +50,24 @@ function nextCompanyId(companies) {
 export function addCompany(companyInput) {
   const companies = getCompanies();
 
-  const normalizedRuc = (companyInput?.ruc || '').trim();
+  const normalizedemail = (companyInput?.email || '').trim();
 
-  if (!normalizedRuc) {
-    throw new Error('Debes ingresar un RUC válido.');
+  if (!normalizedemail) {
+    throw new Error('Debes ingresar un email válido.');
   }
 
   const exists = companies.some(
-    (company) => (company?.ruc || '').trim() === normalizedRuc,
+    (company) => (company?.email || '').trim() === normalizedemail,
   );
 
   if (exists) {
-    throw new Error('Ya existe una empresa registrada con ese RUC.');
+    throw new Error('Ya existe una empresa registrada con ese email.');
   }
 
   const company = {
     id: nextCompanyId(companies),
     name: companyInput?.name || '',
-    ruc: normalizedRuc,
+    email: normalizedemail,
     password: companyInput?.password || '',
   };
 

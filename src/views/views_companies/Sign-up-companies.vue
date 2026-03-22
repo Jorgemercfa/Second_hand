@@ -12,7 +12,7 @@ const router = useRouter();
 const { login } = useSessionCompany();
 
 const name = ref('');
-const ruc = ref('');
+const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const error = ref('');
@@ -21,7 +21,7 @@ const onSignUp = () => {
   error.value = '';
 
   if (!name.value.trim()) {
-    error.value = 'Ingresa el nombre de la empresa.';
+    error.value = 'Ingresa el nombre de la vendedor.';
     return;
   }
 
@@ -38,7 +38,7 @@ const onSignUp = () => {
   try {
     const company = addCompany({
       name: name.value,
-      ruc: ruc.value,
+      email: email.value,
       password: password.value,
     });
 
@@ -46,7 +46,7 @@ const onSignUp = () => {
 
     router.push({ name: 'HomeCompanies' });
   } catch (e) {
-    error.value = e?.message || 'No se pudo registrar la empresa.';
+    error.value = e?.message || 'No se pudo registrar la vendedor.';
   }
 };
 </script>
@@ -59,7 +59,7 @@ const onSignUp = () => {
 
     <section class="contact-section">
       <div class="contact-container">
-        <h1 class="main-title">Crear cuenta empresa</h1>
+        <h1 class="main-title">Crear cuenta vendedor</h1>
 
         <div class="contact-card">
           <form class="form-area" @submit.prevent="onSignUp" autocomplete="on">
@@ -68,7 +68,7 @@ const onSignUp = () => {
             </div>
 
             <div class="form-group">
-              <label>Nombre de la empresa</label>
+              <label>Nombre del vendedor</label>
               <input
                 v-model="name"
                 type="text"
@@ -78,15 +78,12 @@ const onSignUp = () => {
             </div>
 
             <div class="form-group">
-              <label>RUC</label>
+              <label>email</label>
               <input
-                v-model="ruc"
-                type="text"
-                inputmode="numeric"
-                maxlength="11"
+                v-model="email"
+                type="email"
                 required
-                autocomplete="off"
-                placeholder="Ej: 20512345678"
+                autocomplete="email"
               />
             </div>
 

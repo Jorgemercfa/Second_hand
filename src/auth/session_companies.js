@@ -73,7 +73,7 @@ export function useSessionCompany() {
     state.company = {
       id: company.id ?? null,
       name: company.name ?? '',
-      ruc: company.ruc ?? '',
+      email: company.email ?? '',
     };
 
     persist();

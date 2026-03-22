@@ -11,7 +11,7 @@ import { useSessionCompany } from '@/auth/session_companies';
 const router = useRouter();
 const { login } = useSessionCompany();
 
-const ruc = ref('');
+const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const error = ref('');
@@ -32,7 +32,7 @@ const onSignUp = () => {
   try {
     const company = addCompany({
       name: name.value,
-      ruc: ruc.value,
+      email: email.value,
       password: password.value,
     });
 
@@ -53,7 +53,7 @@ const onSignUp = () => {
 
     <section class="contact-section">
       <div class="contact-container">
-        <h1 class="main-title">Olvide Contraseña Empresas</h1>
+        <h1 class="main-title">Olvide Contraseña Vendedor</h1>
 
         <div class="contact-card">
           <form class="form-area" @submit.prevent="onSignUp" autocomplete="on">
@@ -62,15 +62,12 @@ const onSignUp = () => {
             </div>
 
             <div class="form-group">
-              <label>RUC</label>
+              <label>email</label>
               <input
-                v-model="ruc"
-                type="text"
-                inputmode="numeric"
-                maxlength="11"
+                v-model="email"
+                type="email"
                 required
-                autocomplete="off"
-                placeholder="Ej: 20512345678"
+                autocomplete="email"
               />
             </div>
 

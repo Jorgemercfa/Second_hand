@@ -11,16 +11,16 @@ import { useSessionCompany } from '@/auth/session_companies';
 const router = useRouter();
 const { login } = useSessionCompany();
 
-const ruc = ref('');
+const email = ref('');
 const password = ref('');
 const error = ref('');
 
 const onLogin = () => {
   error.value = '';
 
-  const rucNormalized = ruc.value.trim().toLowerCase();
+  const emailNormalized = email.value.trim().toLowerCase();
 
-  // 🔹 obtener empresas locales de forma segura
+  // 🔹 obtener vendedors locales de forma segura
   const localCompaniesRaw = getCompanies();
   const localCompanies = Array.isArray(localCompaniesRaw)
     ? localCompaniesRaw
@@ -29,11 +29,11 @@ const onLogin = () => {
   const allCompanies = localCompanies;
 
   const found = allCompanies.find(
-    (c) => (c.ruc || '').trim().toLowerCase() === rucNormalized,
+    (c) => (c.email || '').trim().toLowerCase() === emailNormalized,
   );
 
   if (!found) {
-    error.value = 'El RUC no está registrado.';
+    error.value = 'El email no está registrado.';
     return;
   }
 
@@ -56,7 +56,7 @@ const onLogin = () => {
 
     <section class="contact-section">
       <div class="contact-container">
-        <h1 class="main-title">Iniciar Sesión Empresas</h1>
+        <h1 class="main-title">Iniciar Sesión vendedors</h1>
 
         <div class="contact-card">
           <form class="form-area" @submit.prevent="onLogin" autocomplete="on">
@@ -65,8 +65,13 @@ const onLogin = () => {
             </div>
 
             <div class="form-group">
-              <label>RUC</label>
-              <input v-model="ruc" type="text" required />
+              <label>email</label>
+              <input
+                v-model="email"
+                type="email"
+                required
+                autocomplete="email"
+              />
             </div>
 
             <div class="form-group">
@@ -84,11 +89,13 @@ const onLogin = () => {
 
           <div class="contact-info">
             <router-link to="/Sign-up-companies">
-              <button class="other-btn" type="button">Registrar empresa</button>
+              <button class="other-btn" type="button">
+                Registrar vendedor
+              </button>
             </router-link>
             <router-link to="/Forget-Password-Companies">
               <button class="other-btn" type="button">
-                Olvide Contraseña empresas
+                Olvide Contraseña vendedor
               </button>
             </router-link>
           </div>
