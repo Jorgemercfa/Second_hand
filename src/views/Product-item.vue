@@ -13,8 +13,25 @@ const getButtonText = (product) => product.details_button || 'Ver detalles'
 const parsePrice = (value) => {
   if (value === null || value === undefined || value === '') return null
 
+  if (typeof value === 'number') {
+    return Number.isFinite(value) ? value : null
+  }
+
+  if (typeof value !== 'string') return null
+
+  const cleaned = value.trim().replace(/[^\d.,-]/g, '')
+  if (!cleaned) return null
+
+  const lastComma = cleaned.lastIndexOf(',')
+  const lastDot = cleaned.lastIndexOf('.')
+  const decimalIndex = Math.max(lastComma, lastDot)
+
   const normalizedValue =
-    typeof value === 'string' ? value.replace(/[^\d.,-]/g, '').replace(',', '.') : value
+    decimalIndex >= 0
+      ? `${cleaned.slice(0, decimalIndex).replace(/[.,]/g, '')}.${cleaned
+          .slice(decimalIndex + 1)
+          .replace(/[.,]/g, '')}`
+      : cleaned.replace(/[.,]/g, '')
 
   const parsed = Number(normalizedValue)
 
@@ -27,6 +44,12 @@ const getProductPrice = (product) => {
 
   const originalPrice = parsePrice(product.originalPrice)
   if (originalPrice !== null) return originalPrice
+
+  const discountPrice = parsePrice(product.discount_price)
+  if (discountPrice !== null) return discountPrice
+
+  const tributoPrice = parsePrice(product.tributo)
+  if (tributoPrice !== null) return tributoPrice
 
   return null
 }
