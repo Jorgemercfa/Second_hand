@@ -10,7 +10,34 @@ const products = computed(() => getCompanyproducts())
 
 const getProductName = (product) => product.name || 'Producto sin nombre'
 const getButtonText = (product) => product.details_button || 'Ver detalles'
-const formatPrice = (price) => (Number.isFinite(Number(price)) ? Number(price).toFixed(2) : price)
+const parsePrice = (value) => {
+  if (value === null || value === undefined || value === '') return null
+
+  const normalizedValue =
+    typeof value === 'string' ? value.replace(/[^\d.,-]/g, '').replace(',', '.') : value
+
+  const parsed = Number(normalizedValue)
+
+  return Number.isFinite(parsed) ? parsed : null
+}
+
+const getProductPrice = (product) => {
+  const directPrice = parsePrice(product.price)
+  if (directPrice !== null) return directPrice
+
+  const originalPrice = parsePrice(product.originalPrice)
+  if (originalPrice !== null) return originalPrice
+
+  return null
+}
+
+const formatPrice = (product) => {
+  const price = getProductPrice(product)
+
+  if (price === null) return 'Precio no disponible'
+
+  return `S/ ${price.toFixed(2)}`
+}
 </script>
 
 <template>
@@ -31,7 +58,9 @@ const formatPrice = (price) => (Number.isFinite(Number(price)) ? Number(price).t
             :alt="getProductName(product)"
             class="product-image"
           />
-          <p class="product-description">S/ {{ formatPrice(product.price) }}</p>
+          <p class="product-description">
+            {{ formatPrice(product) }}
+          </p>
         </div>
 
         <button
