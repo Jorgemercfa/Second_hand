@@ -4,7 +4,7 @@ import Home from './views/Home-item.vue';
 import About from './views/About-item.vue';
 import products from './views/Product-item.vue';
 import Contact from './views/Contact-item.vue';
-import productsDetails from './components/Component-products-item.vue';
+import productsDetails from './components/Component-coupons-item.vue';
 
 // NUEVO
 import SignIn from './views/Sign-in.vue';
@@ -22,7 +22,7 @@ import SignUpCompany from './views/views_companies/Sign-up-companies.vue';
 import ForgetPasswordCompany from './views/views_companies/Forget-password-companies.vue';
 import HomeCompanies from './views/views_companies/Home-companies.vue';
 import Createproducts from './views/views_companies/Create-product-item.vue';
-import Companyproducts from './views/views_companies/Company-products-item.vue';
+import Companyproducts from './views/views_companies/Company-product-item.vue';
 
 import { useSession } from './auth/session';
 import { useSessionCompany } from './auth/session_companies';
