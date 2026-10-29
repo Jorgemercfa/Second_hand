@@ -1,28 +1,24 @@
-/* RESET BASE */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* CONFIGURACIÓN GLOBAL */
-html, body {
+html,
+body {
   width: 100%;
   overflow-x: hidden;
-  font-family: 'Inter', sans-serif;
-  background-color: #ffffff;
-  color: #111111;
-
-  /* Mejor renderizado de texto */
+  font-family: 'Nunito', sans-serif;
+  background: #f7f8fc;
+  color: #111827;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* Tipografía base moderna */
   font-size: 16px;
   line-height: 1.6;
 }
 
-/* ESTRUCTURA PRINCIPAL */
 body {
   display: flex;
   flex-direction: column;
@@ -35,10 +31,14 @@ body {
   flex: 1;
 }
 
-/* JERARQUÍA TIPOGRÁFICA 2026 */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  letter-spacing: -0.5px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 800;
+  letter-spacing: -0.04em;
 }
 
 p {
@@ -46,24 +46,36 @@ p {
   line-height: 1.8;
 }
 
-/* Mejor apariencia para textos pequeños */
-span, small {
+span,
+small {
   font-weight: 400;
 }
 
-/* Links modernos */
 a {
   text-decoration: none;
   color: inherit;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
 a:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
-/* Imágenes responsivas */
 img {
   max-width: 100%;
   display: block;
+}
+
+img[src*='company-logo'] {
+  max-width: 60px !important;
+  max-height: 60px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
 }

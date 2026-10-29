@@ -1,5 +1,6 @@
 <script setup>
 import 'primeicons/primeicons.css';
+
 const year = new Date().getFullYear();
 </script>
 
@@ -9,114 +10,105 @@ const year = new Date().getFullYear();
       <div class="contact-footer">
         <h4 class="titile-footer">Contacto</h4>
         <div class="footer-text">
-          <div>altoque@gmail.com</div>
+          <div>hello@secondhand.com</div>
           <div>+51 999 999 999</div>
         </div>
       </div>
+
       <div class="social-media">
         <h4 class="titile-footer">Redes Sociales</h4>
         <div class="social-media2">
-          <div>
-            <a href=""><i class="pi pi-facebook"></i></a>
-          </div>
-          <div>
-            <a href=""><i class="pi pi-instagram"></i></a>
-          </div>
-          <div>
-            <a href=""><i class="pi pi-youtube"></i></a>
-          </div>
-          <div>
-            <a href=""><i class="pi pi-twitter"></i></a>
-          </div>
-          <div>
-            <a href=""><i class="pi pi-tiktok"></i></a>
-          </div>
+          <div><a href="#" aria-label="Facebook"><i class="pi pi-facebook"></i></a></div>
+          <div><a href="#" aria-label="Instagram"><i class="pi pi-instagram"></i></a></div>
+          <div><a href="#" aria-label="YouTube"><i class="pi pi-youtube"></i></a></div>
+          <div><a href="#" aria-label="Twitter"><i class="pi pi-twitter"></i></a></div>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h4 class="titile-footer">Legal</h4>
+        <div class="links-column">
+          <router-link to="/Privacy-Policy">Privacidad</router-link>
+          <router-link to="/Terms-of-Use">Términos</router-link>
+          <router-link to="/FAQ">FAQ</router-link>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      © {{ year }} Al Toque SA. Todos los derechos reservados.
-    </div>
+
+    <div class="footer-bottom">© {{ year }} Second Hand. Todos los derechos reservados.</div>
   </footer>
 </template>
 
 <style>
 .footer-area {
-  background-color: #1f1f1f; /* SE MANTIENE TU VERDE */
+  background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
   color: white;
   margin-top: 100px;
 }
 
-/* CONTENEDOR */
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 50px 5%;
+  padding: 48px 5%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 40px;
 }
 
-/* TÍTULOS */
 .titile-footer {
-  font-size: 1.1rem;
-  margin-bottom: 15px;
+  font-size: 1.05rem;
+  margin-bottom: 16px;
   position: relative;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-/* Línea decorativa (BLANCA para que combine con el verde) */
 .titile-footer::after {
   content: '';
-  width: 40px;
+  width: 42px;
   height: 3px;
-  background-color: #ffffff;
+  background: #7cc6ff;
   position: absolute;
-  bottom: -6px;
+  bottom: -8px;
   left: 0;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
-/* TEXTO */
-.footer-text {
-  font-size: 0.95rem;
-  color: #e6e6e6;
-  line-height: 1.6;
+.footer-text,
+.links-column {
+  color: #dfe7f2;
+  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-/* ICONOS */
 .social-media2 {
   display: flex;
-  gap: 20px;
-  margin-top: 15px;
+  gap: 18px;
+  margin-top: 8px;
 }
 
 .social-media2 a,
 .social-media2 i {
-  font-size: 1.8rem;
-  color: #e6e6e6;
-  transition: 0.3s ease;
-  cursor: pointer;
+  font-size: 1.6rem;
+  color: #dfe7f2;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
-/* Hover elegante */
-.social-media2 a:hover,
-.social-media2 i:hover {
-  color: #ffffff;
-  transform: translateY(-3px);
+.social-media2 a:hover i {
+  color: white;
+  transform: translateY(-2px);
 }
 
-/* BARRA INFERIOR */
 .footer-bottom {
   text-align: center;
-  padding: 20px;
+  padding: 18px 20px;
   font-size: 0.85rem;
-  color: #cccccc;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: #cbd5e1;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;

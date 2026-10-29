@@ -1,19 +1,18 @@
 <script setup>
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import Navbar from '@/components/Navbar-item.vue';
 import Footer from '@/components/Footer-item.vue';
-
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { getCompanyproducts } from '@/auth/companyproductsRepo';
+import { useHomeSeo } from '@/composables/useSeoHead';
 
-/* =============================
-   CARRUSEL PRINCIPAL
-============================= */
-import img1 from '@/assets/picture1.png';
-import img2 from '@/assets/picture2.png';
-import img3 from '@/assets/picture3.png';
-import img4 from '@/assets/picture4.png';
+useHomeSeo();
 
-const images = [img1, img2, img3, img4];
+const images = [
+  'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1500&q=80',
+  'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1500&q=80',
+  'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1500&q=80',
+  'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1500&q=80',
+];
 
 const currentImageIndex = ref(0);
 const intervalId = ref(null);
@@ -42,58 +41,8 @@ onBeforeUnmount(() => {
   stopCarousel();
 });
 
-/* =============================
-   CLIENTES
-============================= */
-
-/* =============================
-   CARRUSEL CUPONES (HORIZONTAL)
-============================= */
-const productsTrackRef = ref(null);
-
-const scrollproductsBy = (direction) => {
-  const el = productsTrackRef.value;
-  if (!el) return;
-
-  const card = el.querySelector('.logs-item');
-  const cardWidth = card ? card.getBoundingClientRect().width : 220;
-  const gap = 20;
-  const step = cardWidth + gap;
-
-  el.scrollBy({ left: direction * step, behavior: 'smooth' });
-};
-
-const scrollproductsLeft = () => scrollproductsBy(-1);
-const scrollproductsRight = () => scrollproductsBy(1);
-
-/* =============================
-   FILTRO: SOLO RESTAURANTES
-============================= */
 const products = computed(() => getCompanyproducts());
-
-const restaurantproducts = computed(() =>
-  products.value.filter((c) => c.category === 'Restaurantes'),
-);
-
-/* =============================
-   CARRUSEL RESTAURANTES (scroll)
-============================= */
-const restaurantTrackRef = ref(null);
-
-const scrollRestaurantsBy = (direction) => {
-  const el = restaurantTrackRef.value;
-  if (!el) return;
-
-  const card = el.querySelector('.logs-item');
-  const cardWidth = card ? card.getBoundingClientRect().width : 220;
-  const gap = 20;
-  const step = cardWidth + gap;
-
-  el.scrollBy({ left: direction * step, behavior: 'smooth' });
-};
-
-const scrollRestaurantsLeft = () => scrollRestaurantsBy(-1);
-const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
+const featuredCards = computed(() => products.value.slice(0, 6));
 </script>
 
 <template>
@@ -102,9 +51,8 @@ const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
   </header>
 
   <div class="home-area">
-    <!-- Carrusel automático -->
     <div class="carousel-container">
-      <img class="img-home" :src="images[currentImageIndex]" />
+      <img class="img-home" :src="images[currentImageIndex]" alt="Second Hand" />
       <div class="carousel-dots">
         <span
           v-for="(image, index) in images"
@@ -116,110 +64,47 @@ const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
     </div>
 
     <div class="text-home">
-      Second Hand donde le damos una segunda oportunidad a los productos.
+      Second Hand donde le damos una segunda oportunidad a los productos para que sigan siendo útiles,
+      bonitos y accesibles para más personas.
     </div>
 
-    <h1 class="title-home">Productos destacadas</h1>
+    <div class="feature-banner">
+      <div class="feature-card">
+        <strong>+500</strong>
+        <span>productos reutilizados</span>
+      </div>
+      <div class="feature-card">
+        <strong>20%</strong>
+        <span>de ahorro promedio</span>
+      </div>
+      <div class="feature-card">
+        <strong>4.8/5</strong>
+        <span>valoración de clientes</span>
+      </div>
+    </div>
 
-    <!-- Carrusel de cupones -->
+    <h1 class="title-home">Productos destacados</h1>
+
     <div class="our-products-wrapper">
-      <button
-        class="products-nav products-nav-left"
-        type="button"
-        aria-label="Anterior"
-        @click="scrollproductsLeft"
-      >
-        ‹
-      </button>
-
-      <div class="our-products" ref="productsTrackRef">
+      <div class="our-products">
         <router-link
-          v-for="product in products"
+          v-for="product in featuredCards"
           :key="product.id"
           :to="{ name: 'productsDetails', params: { id: product.id } }"
           class="logs-item"
         >
-          <div class="product-mini-badge">
-            {{ product.percentage }}
-          </div>
-
           <img class="card-icons" :src="product.image" :alt="product.name" />
-
           <div class="product-mini-info">
-            <h4 class="product-mini-title">
-              {{ product.name }}
-            </h4>
-
-            <div class="product-mini-price">
-              S/ {{ product.discount_price }}
-            </div>
+            <h4 class="product-mini-title">{{ product.name }}</h4>
+            <div class="product-mini-price">S/ {{ product.discount_price || product.price || '0.00' }}</div>
           </div>
         </router-link>
       </div>
-
-      <button
-        class="products-nav products-nav-right"
-        type="button"
-        aria-label="Siguiente"
-        @click="scrollproductsRight"
-      >
-        ›
-      </button>
     </div>
 
-    <h1 class="title-home">Electrodomesticos</h1>
-    <div class="our-products-wrapper">
-      <button
-        class="products-nav products-nav-left"
-        type="button"
-        aria-label="Anterior"
-        @click="scrollRestaurantsLeft"
-      >
-        ‹
-      </button>
-
-      <div class="our-products" ref="restaurantTrackRef">
-        <router-link
-          v-for="product in restaurantproducts"
-          :key="product.id"
-          :to="{ name: 'productsDetails', params: { id: product.id } }"
-          class="logs-item"
-        >
-          <div class="product-mini-badge">
-            {{ product.percentage }}
-          </div>
-
-          <img class="card-icons" :src="product.image" :alt="product.name" />
-
-          <div class="product-mini-info">
-            <h4 class="product-mini-title">
-              {{ product.name }}
-            </h4>
-
-            <div class="product-mini-price">
-              S/ {{ product.discount_price }}
-            </div>
-
-            <div class="product-mini-date">
-              Hasta {{ product.expiration_date }}
-            </div>
-          </div>
-        </router-link>
-
-        <!-- Si no hay restaurantes, muestra un mensajito -->
-        <div v-if="restaurantproducts.length === 0" class="empty-carousel">
-          No hay cupones de restaurantes todavía.
-        </div>
-      </div>
-
-      <button
-        class="products-nav products-nav-right"
-        type="button"
-        aria-label="Siguiente"
-        @click="scrollRestaurantsRight"
-      >
-        ›
-      </button>
+    <div class="cta-strip">
+      <h2>Más valor, menos desperdicio</h2>
+      <router-link to="/Promotions-item" class="cta-button">Ver promociones</router-link>
     </div>
   </div>
 
@@ -228,17 +113,9 @@ const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
   </footer>
 </template>
 
-<style>
-/* ===============================
-   HERO / CARRUSEL PRINCIPAL
-================================= */
-.img-home {
+<style scoped>
+.home-area {
   width: 100%;
-  height: 80vh;
-  min-height: 500px;
-  object-fit: cover;
-  object-position: center 30%;
-  transition: opacity 0.8s ease;
 }
 
 .carousel-container {
@@ -250,12 +127,20 @@ const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(15, 23, 42, 0.18);
+}
+
+.img-home {
+  width: 100%;
+  height: 78vh;
+  min-height: 480px;
+  object-fit: cover;
+  display: block;
 }
 
 .carousel-dots {
   position: absolute;
-  bottom: 20px;
+  bottom: 22px;
   left: 0;
   right: 0;
   display: flex;
@@ -268,263 +153,141 @@ const scrollRestaurantsRight = () => scrollRestaurantsBy(1);
   width: 12px;
   height: 12px;
   border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  transition: background-color 0.3s;
-  background: rgba(255, 255, 255, 0.45);
 }
 
 .carousel-dots .active {
-  background: #325bcd;
-  transform: scale(1.2);
+  background: #2b62d9;
+  transform: scale(1.18);
 }
 
-/* ===============================
-   TEXTO + TITULOS
-================================= */
 .text-home {
   max-width: 900px;
-  margin: 60px auto;
+  margin: 52px auto 0;
   text-align: center;
-  font-size: 18px;
-  line-height: 1.7;
+  font-size: 1.12rem;
+  color: #334761;
+  line-height: 1.8;
+}
+
+.feature-banner {
+  max-width: 1000px;
+  margin: 38px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
+  gap: 18px;
+}
+
+.feature-card {
+  background: linear-gradient(135deg, #ffffff, #edf4ff);
+  border-radius: 18px;
+  padding: 24px 18px;
+  text-align: center;
+  box-shadow: 0 10px 26px rgba(43, 98, 217, 0.08);
+  border: 1px solid rgba(43, 98, 217, 0.08);
+}
+
+.feature-card strong {
+  display: block;
+  font-size: 1.7rem;
+  color: #1f3d8f;
+  margin-bottom: 4px;
+}
+
+.feature-card span {
+  color: #53657a;
 }
 
 .title-home {
   text-align: center;
-  font-size: 32px;
-  font-weight: 700;
-  margin: 80px 0 40px 0;
-  position: relative;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 70px 0 28px;
+  color: #172437;
 }
 
-.title-home::after {
-  content: '';
-  width: 60px;
-  height: 4px;
-  background-color: #325bcd;
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 5px;
-}
-
-/* ===============================
-   CUPONES: CARRUSEL HORIZONTAL
-================================= */
 .our-products-wrapper {
-  position: relative;
-  width: 100%;
-  padding: 40px 60px;
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  padding-bottom: 30px;
 }
 
 .our-products {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding: 20px 0;
+  padding: 16px 4px 10px;
 }
 
-.our-products::-webkit-scrollbar {
-  height: 8px;
-}
-
-.our-products::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.35);
-  border-radius: 10px;
-}
-
-.products-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
-  font-size: 28px;
-  line-height: 1;
-  display: grid;
-  place-items: center;
-  z-index: 2;
-}
-
-.products-nav-left {
-  left: 14px;
-}
-
-.products-nav-right {
-  right: 14px;
-}
-
-/* Card reutilizada */
 .logs-item {
-  scroll-snap-align: start;
-  flex: 0 0 220px;
-  min-height: 300px;
-  position: relative;
-  background: #1f1f1f;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
+  flex: 0 0 260px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 12px 24px rgba(18, 32, 54, 0.08);
   text-decoration: none;
-  color: #ffffff;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transition: 0.25s;
-}
-
-.logs-item:hover {
-  transform: translateY(-4px);
+  color: inherit;
 }
 
 .card-icons {
   width: 100%;
-  height: 110px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  background-color: white;
+}
+
+.product-mini-info {
+  padding: 16px;
 }
 
 .product-mini-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-bottom: 5px;
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+  color: #172437;
 }
 
 .product-mini-price {
-  font-weight: bold;
-  color: #ffffff;
+  color: #2b62d9;
+  font-weight: 800;
 }
 
-.product-mini-date {
-  font-size: 0.8rem;
-  color: #ffffff;
-}
-
-.product-mini-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #ffd700;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: bold;
-}
-
-/* ===============================
-   SECTORES (se queda como está)
-================================= */
-.our-sector {
-  width: 100%;
-  height: 300px;
-  background: linear-gradient(135deg, #325bcd, #2549ad);
+.cta-strip {
+  width: min(1100px, 90%);
+  margin: 30px auto 0;
+  background: linear-gradient(135deg, #1f3d8f, #2b62d9);
+  border-radius: 24px;
+  padding: 28px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
+  color: white;
 }
 
-/* ===============================
-   CLIENTES (carrusel infinito)
-================================= */
-.our-customers {
-  overflow: hidden;
-  background: linear-gradient(135deg, #325bcd, #2549ad);
-  padding: 50px 0;
-  position: relative;
+.cta-strip h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2vw, 2rem);
 }
 
-.customers-track {
-  display: flex;
-  width: max-content;
-  animation: scrollCustomers 25s linear infinite;
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  color: #183a89;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-weight: 800;
+  text-decoration: none;
 }
 
-.customer-slide {
-  flex: 0 0 auto;
-  padding: 0 40px;
-}
-
-.customer-icons {
-  height: 60px;
-  width: auto;
-  opacity: 0.8;
-  transition: all 0.3s ease;
-}
-
-.customer-icons:hover {
-  transform: scale(1.1);
-}
-
-@keyframes scrollCustomers {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* ===============================
-   RESPONSIVE
-================================= */
-@media (max-width: 768px) {
-  .img-home {
-    height: 55vh;
-    min-height: 280px;
+@media (max-width: 700px) {
+  .feature-banner {
+    grid-template-columns: 1fr;
   }
 
-  .text-home {
-    font-size: 16px;
-    padding: 0 20px;
-    margin: 40px auto;
-  }
-
-  .title-home {
-    font-size: 26px;
-    margin: 60px 0 30px 0;
-  }
-
-  .our-products-wrapper {
-    padding: 30px 45px;
-  }
-
-  .logs-item {
-    flex-basis: 180px;
-    min-height: 220px;
-  }
-
-  .our-sector {
-    height: auto;
-    flex-wrap: wrap;
-    padding: 50px 20px;
-    gap: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .img-home {
-    height: 45vh;
-  }
-
-  .title-home {
-    font-size: 22px;
-  }
-
-  .logs-item {
-    flex-basis: 160px;
-  }
-
-  .customer-icons {
-    height: 45px;
+  .cta-strip {
+    flex-direction: column;
+    text-align: center;
   }
 }
 </style>

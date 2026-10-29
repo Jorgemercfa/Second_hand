@@ -5,8 +5,12 @@ import About from './views/About-item.vue';
 import products from './views/Product-item.vue';
 import Contact from './views/Contact-item.vue';
 import productsDetails from './components/Component-coupons-item.vue';
+import Promotions from './views/Promotions-item.vue';
+import Reviews from './views/Reviews-item.vue';
+import PrivacyPolicy from './views/Privacy-Policy.vue';
+import TermsOfUse from './views/Terms-of-use.vue';
+import FAQ from './views/FAQ-item.vue';
 
-// NUEVO
 import SignIn from './views/Sign-in.vue';
 import SignUp from './views/Sign-up.vue';
 import ForgetPassword from './views/Forget-Password.vue';
@@ -16,7 +20,6 @@ import Cart from './views/Cart-item.vue';
 import Checkout from './views/Checkout-item.vue';
 import OrderConfirmation from './views/OrderConfirmation-item.vue';
 
-// EMPRESA
 import SignInCompany from './views/views_companies/Sign-in-companies.vue';
 import SignUpCompany from './views/views_companies/Sign-up-companies.vue';
 import ForgetPasswordCompany from './views/views_companies/Forget-password-companies.vue';
@@ -28,13 +31,62 @@ import { useSession } from './auth/session';
 import { useSessionCompany } from './auth/session_companies';
 
 const routes = [
-  { path: '/', name: 'Home', component: Home },
-  { path: '/About-item', name: 'About', component: About },
-  { path: '/Product-item', name: 'product', component: products },
-  { path: '/Contact-item', name: 'Contact', component: Contact },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    meta: { title: 'Second Hand | Inicio' },
+  },
+  {
+    path: '/About-item',
+    name: 'About',
+    component: About,
+    meta: { title: 'Nosotros | Second Hand' },
+  },
+  {
+    path: '/Product-item',
+    name: 'product',
+    component: products,
+    meta: { title: 'Productos | Second Hand' },
+  },
+  {
+    path: '/Contact-item',
+    name: 'Contact',
+    component: Contact,
+    meta: { title: 'Ayuda | Second Hand' },
+  },
+  {
+    path: '/Promotions-item',
+    name: 'Promotions',
+    component: Promotions,
+    meta: { title: 'Promociones | Second Hand' },
+  },
+  {
+    path: '/Reviews-item',
+    name: 'Reviews',
+    component: Reviews,
+    meta: { title: 'Reseñas | Second Hand' },
+  },
+  {
+    path: '/Privacy-Policy',
+    name: 'PrivacyPolicy',
+    component: PrivacyPolicy,
+    meta: { title: 'Política de Privacidad | Second Hand' },
+  },
+  {
+    path: '/Terms-of-Use',
+    name: 'TermsOfUse',
+    component: TermsOfUse,
+    meta: { title: 'Términos de Uso | Second Hand' },
+  },
+  {
+    path: '/FAQ',
+    name: 'FAQ',
+    component: FAQ,
+    meta: { title: 'FAQ | Second Hand' },
+  },
   { path: '/product/:id', name: 'productsDetails', component: productsDetails },
 
-  // USUARIO
   { path: '/Sign-in', name: 'SignIn', component: SignIn },
   { path: '/Sign-up', name: 'SignUp', component: SignUp },
   {
@@ -67,7 +119,6 @@ const routes = [
     meta: { requiresAuth: true },
   },
 
-  // EMPRESA
   {
     path: '/Sign-in-companies',
     name: 'SignInCompany',
@@ -114,9 +165,7 @@ const router = createRouter({
   },
 });
 
-// Guard ÚNICO que maneja ambos tipos de auth
 router.beforeEach((to) => {
-  // Rutas de usuario
   if (to.meta?.requiresAuth) {
     const { isAuthenticated } = useSession();
     if (!isAuthenticated.value) {
@@ -124,7 +173,6 @@ router.beforeEach((to) => {
     }
   }
 
-  // Rutas de empresa
   if (to.meta?.requiresCompanyAuth) {
     const { isCompanyAuthenticated } = useSessionCompany();
     if (!isCompanyAuthenticated.value) {
@@ -133,9 +181,8 @@ router.beforeEach((to) => {
   }
 });
 
-// ✅ Asegurar scroll en navegación
 router.afterEach(() => {
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
 });
 
 export default router;
